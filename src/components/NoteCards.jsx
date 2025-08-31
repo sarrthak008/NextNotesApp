@@ -1,11 +1,24 @@
 import React from 'react'
 import SVG1 from "../assets/arraow1.svg"
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
-const NoteCards = ({ data, i, arr }) => {
+const NoteCards = ({ data, i, arr ,funcLoad}) => {
 
-  console.log(data)
+  const deleteCard =(i)=>{
+     try {
+       let notes =   JSON.parse(localStorage.getItem("notes")) || []
+       notes.splice(i,1)
+       localStorage.setItem("notes",JSON.stringify(notes))
+       funcLoad()
+     } catch (error) {
+      
+     }
+  }
+
+
   return (
-    <div className={`w-[80%] flex  ${i % 2 == 0 ? 'justify-start' : 'justify-end'} mx-auto relative z-30`}>
+    <div className={`box${i} w-[80%] flex  ${i % 2 == 0 ? 'justify-start' : 'justify-end'} mx-auto relative z-30`} onDoubleClick={()=>{deleteCard(i)}}>
       <div className={`h-[280px] w-[250px] ${i % 2 == 0 ? 'rotate-12' : '-rotate-12'} bg-gray-100 rounded-2xl shadow-2xl shadow-gray-500 m-2`}>
         <div className='pin h-[35px] w-[36px] mx-auto bg-red-300 rounded-full relative border-b-5 border-b-orange-500 shadow-md shadow-gray-400'>
           <div className='h-[25px] w-[26px] bg-red-400  border-b-4 border-b-red-500   rounded-full absolute top-[-10%] left-[10%] shadow-md shadow-gray-400'></div>
