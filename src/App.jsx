@@ -56,8 +56,9 @@ useEffect(()=>{
 
 useEffect(()=>{
   if(notes.length === 0){
-    localStorage.clear()
+    // localStorage.clear()
     loadNotes()
+    
   }
 },[notes])
 
